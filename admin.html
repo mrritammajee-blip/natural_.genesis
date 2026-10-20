@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Natural Genesis Private Limited — Executive Management Dashboard">
+  <title>Executive Admin Dashboard | Natural Genesis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="admin.css">
+  <script>
+    // Authentication Guard
+    (function() {
+      const user = sessionStorage.getItem('ng_admin_user') || localStorage.getItem('ng_admin_user');
+      if (!user) {
+        window.location.replace('login.html');
+      }
+    })();
+  </script>
+</head>
+<body class="admin-body">
+
+  <!-- Admin Top Navigation Bar -->
+  <header class="admin-navbar">
+    <div class="admin-navbar-inner">
+      <div class="admin-brand-group">
+        <a class="brand" href="index.html" title="Natural Genesis Home">
+          <img class="brand-logo" src="natural-genesis-logo.jpeg" alt="Natural Genesis logo">
+          <span class="brand-name">NATURAL GENESIS<small>PRIVATE LIMITED</small></span>
+        </a>
+        <span class="admin-brand-badge">Admin Console</span>
+      </div>
+
+      <div class="admin-nav-actions">
+        <a href="index.html" class="nav-link-btn" title="View live public site">
+          <span>Public Website</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="7" y1="17" x2="17" y2="7"></line><polyline points="7 7 17 7 17 17"></polyline></svg>
+        </a>
+
+        <div class="admin-user-pill" title="Authenticated Administrator">
+          <div class="user-avatar" id="userAvatar">SS</div>
+          <div class="user-info">
+            <span class="user-email" id="displayAdminEmail">subhadipsarkars@gmail.com</span>
+            <span class="user-role"><span class="online-dot"></span> Master Administrator</span>
+          </div>
+        </div>
+
+        <button type="button" class="logout-btn" id="logoutBtn" title="Sign out of admin session">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+          <span>Sign Out</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="admin-container">
+    
+    <!-- Page Header & Action Bar -->
+    <div class="dashboard-header">
+      <div class="dashboard-title-group">
+        <h1>Executive Operations Overview</h1>
+        <p>Real-time enterprise metrics, production logs &amp; incoming commercial leads.</p>
+      </div>
+      <div class="dashboard-actions">
+        <button type="button" class="action-btn action-btn-secondary" id="exportCsvBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          <span>Export Enquiries CSV</span>
+        </button>
+        <button type="button" class="action-btn action-btn-primary" id="refreshDataBtn">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"></polyline><polyline points="1 20 1 14 7 14"></polyline><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path></svg>
+          <span>Refresh Data</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- KPI Metric Cards Grid -->
+    <section class="kpi-grid">
+      <div class="kpi-card kpi-water">
+        <div class="kpi-header">
+          <span class="kpi-label">Packaged Drinking Water</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+          </div>
+        </div>
+        <div class="kpi-value">18,500 L</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend-up">+14.2%</span>
+          <span>Daily volume · TDS 42 ppm</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-goat">
+        <div class="kpi-header">
+          <span class="kpi-label">Goatery Division</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"></path><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"></path></svg>
+          </div>
+        </div>
+        <div class="kpi-value">450 Head</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend-up">100% OK</span>
+          <span>Certified herd · 2 breeding sheds</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-bakery">
+        <div class="kpi-header">
+          <span class="kpi-label">Artisan Bakery</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 13.87A4 4 0 0 1 7.41 6a5.11 5.11 0 0 1 1.05-1.54 5 5 0 0 1 7.08 0A5.11 5.11 0 0 1 16.59 6 4 4 0 0 1 18 13.87V21H6Z"></path><line x1="6" y1="17" x2="18" y2="17"></line></svg>
+          </div>
+        </div>
+        <div class="kpi-value">3,420 Loaves</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend-up">98.4%</span>
+          <span>Fulfillment rate · Daily ovens</span>
+        </div>
+      </div>
+
+      <div class="kpi-card kpi-export">
+        <div class="kpi-header">
+          <span class="kpi-label">Global Trade &amp; Export</span>
+          <div class="kpi-icon-wrap">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+          </div>
+        </div>
+        <div class="kpi-value">6 Shipments</div>
+        <div class="kpi-subtext">
+          <span class="badge-trend-up">$184k USD</span>
+          <span>Active routes (UAE, SG, UK)</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <div class="admin-tabs-nav">
+      <button type="button" class="tab-btn active" data-tab="tab-enquiries">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        <span>Commercial Enquiries</span>
+        <span class="tab-count" id="enquiryCount">6</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tab-operations">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        <span>Division Operations</span>
+      </button>
+      <button type="button" class="tab-btn" data-tab="tab-security">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        <span>Admin Credentials &amp; Security</span>
+      </button>
+    </div>
+
+    <!-- Tab 1: Commercial Enquiries -->
+    <div class="tab-pane active" id="tab-enquiries">
+      <div class="content-card">
+        
+        <div class="table-filter-bar">
+          <div class="filter-pills">
+            <button type="button" class="filter-pill active" data-filter="all">All Divisions</button>
+            <button type="button" class="filter-pill" data-filter="water">Water</button>
+            <button type="button" class="filter-pill" data-filter="goat">Goatery</button>
+            <button type="button" class="filter-pill" data-filter="bakery">Bakery</button>
+            <button type="button" class="filter-pill" data-filter="export">Export</button>
+          </div>
+
+          <div class="table-search-box">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+            <input type="text" id="tableSearchInput" placeholder="Search by partner or subject...">
+          </div>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table" id="enquiriesTable">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Client / Partner</th>
+                <th>Division</th>
+                <th>Subject &amp; Details</th>
+                <th>Status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="enquiriesTableBody">
+              <!-- Populated by JavaScript -->
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 2: Division Operations -->
+    <div class="tab-pane" id="tab-operations">
+      <div class="divisions-grid">
+        
+        <div class="division-card">
+          <div class="division-card-header">
+            <div class="div-title-group">
+              <h3>Packaged Drinking Water Division</h3>
+              <span>Purification Plant &amp; Bottling Line</span>
+            </div>
+            <span class="division-tag tag-water">Facility A</span>
+          </div>
+          <div class="div-metric-list">
+            <div class="div-metric-item">
+              <span>Daily Output Capacity</span>
+              <strong>25,000 Litres (Operating at 74%)</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Mineral &amp; TDS Testing</span>
+              <strong style="color:#15803d;">Passed (Audit: 42 ppm)</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Active Packaging SKUs</span>
+              <strong>500ml, 1 Litre, 20L Bulk Dispenser</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Distribution Routes</span>
+              <strong>18 Regional Supermarket Networks</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="division-card">
+          <div class="division-card-header">
+            <div class="div-title-group">
+              <h3>Goatery &amp; Farm Division</h3>
+              <span>Sustainable Livestock &amp; Pasture Care</span>
+            </div>
+            <span class="division-tag tag-goat">Pasture Farm 1</span>
+          </div>
+          <div class="div-metric-list">
+            <div class="div-metric-item">
+              <span>Livestock Herd Count</span>
+              <strong>450 Heads (Beetal, Boer &amp; Sirohi)</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Veterinary Health Clearance</span>
+              <strong style="color:#15803d;">100% Up to Date (Dr. K. Banerjee)</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Organic Feed Reserves</span>
+              <strong>28 Days Supply in Silo</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Breeding &amp; Kid Care Shed</span>
+              <strong>Temperature Controlled 22°C - 26°C</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="division-card">
+          <div class="division-card-header">
+            <div class="div-title-group">
+              <h3>Artisan Bread &amp; Bakery Division</h3>
+              <span>Fresh Daily Oven Operations</span>
+            </div>
+            <span class="division-tag tag-bakery">Central Bakery</span>
+          </div>
+          <div class="div-metric-list">
+            <div class="div-metric-item">
+              <span>Morning Shift Output</span>
+              <strong>2,100 Sandwich Loaves &amp; Brown Bread</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Evening Speciality Bake</span>
+              <strong>1,320 Sourdough &amp; Brioche Buns</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Flour &amp; Grain Inventory</span>
+              <strong>High-Protein Wheat &amp; Multigrain Flours</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Retail Dispatch Status</span>
+              <strong style="color:#15803d;">All Morning Routes Dispatched</strong>
+            </div>
+          </div>
+        </div>
+
+        <div class="division-card">
+          <div class="division-card-header">
+            <div class="div-title-group">
+              <h3>Global Trade &amp; Export Division</h3>
+              <span>Freight, Customs &amp; International Port Dispatch</span>
+            </div>
+            <span class="division-tag tag-export">International</span>
+          </div>
+          <div class="div-metric-list">
+            <div class="div-metric-item">
+              <span>Port of Dispatch</span>
+              <strong>Kolkata (Haldia Port) &amp; Nhava Sheva</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Active Destination Ports</span>
+              <strong>Jebel Ali (UAE), Singapore, Southampton (UK)</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Customs Inspection Status</span>
+              <strong style="color:#15803d;">All Phytosanitary Permits Verified</strong>
+            </div>
+            <div class="div-metric-item">
+              <span>Next Consignment Departure</span>
+              <strong>Friday 10:00 AM (Container #NG-77402)</strong>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Tab 3: Security & Credentials -->
+    <div class="tab-pane" id="tab-security">
+      <div class="content-card account-card">
+        
+        <div class="profile-row">
+          <div class="big-avatar">SS</div>
+          <div class="profile-meta">
+            <h3>Subhadip Sarkar</h3>
+            <p>Master Administrator &amp; System Owner</p>
+          </div>
+        </div>
+
+        <div class="credential-info-box">
+          <div class="cred-row">
+            <span class="cred-label">Authorized Admin Email:</span>
+            <span class="cred-val">subhadipsarkars@gmail.com</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-label">Configured Master Password:</span>
+            <span class="cred-val">Aviraj2023@</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-label">Role Privilege:</span>
+            <span style="color:#15803d; font-weight:700;">Super Administrator (Full CRUD)</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-label">Session Storage:</span>
+            <span id="sessionStorageState">Active Session</span>
+          </div>
+          <div class="cred-row">
+            <span class="cred-label">Last Authentication:</span>
+            <span id="lastLoginTime">Just now</span>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:12px; margin-top:20px;">
+          <button type="button" class="action-btn action-btn-secondary" onclick="window.location.href='index.html'">
+            Return to Public Website
+          </button>
+          <button type="button" class="action-btn" style="background:#fee2e2; color:#b91c1c; border:1px solid #fecaca;" onclick="window.NGAuth.logout()">
+            Sign Out Session
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Detail Inquiry Modal -->
+  <div class="modal-overlay" id="inquiryDetailModal">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeDetailModalBtn">&times;</button>
+      <div style="margin-bottom:18px;">
+        <span class="division-tag" id="modalDivTag">Division</span>
+        <h2 id="modalSender" style="font:700 22px 'Manrope',sans-serif; margin:10px 0 4px; color:#162a1e;">Client Name</h2>
+        <p id="modalEmail" style="font-size:13px; color:#566c5e; margin:0;">email@domain.com</p>
+      </div>
+
+      <div style="background:#f7faf7; border:1px solid #e2ebe3; border-radius:10px; padding:16px; margin-bottom:20px;">
+        <h4 id="modalSubject" style="margin:0 0 8px; font:700 14px 'Manrope',sans-serif; color:#183b2b;">Subject</h4>
+        <p id="modalMessage" style="margin:0; font-size:13px; color:#405347; line-height:1.6;">Message text...</p>
+      </div>
+
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <div>
+          <label style="font:700 11px 'Manrope',sans-serif; color:#566c5e; text-transform:uppercase;">Status:</label>
+          <select id="modalStatusSelect" style="padding:6px 10px; border-radius:6px; border:1px solid #d5e0d7; font-size:12px; margin-left:6px;">
+            <option value="New">New</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Resolved">Resolved</option>
+          </select>
+        </div>
+        <button type="button" class="action-btn action-btn-primary" id="saveInquiryStatusBtn">
+          Save Status
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Element -->
+  <div class="admin-toast" id="adminToast">
+    <span id="toastMessage">Notification message</span>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    // Inquiries Data Set
+    const SAMPLE_INQUIRIES = [
+      {
+        id: 1,
+        date: '2026-10-12',
+        sender: 'Grand Horizon Resorts & Hotels',
+        email: 'procurement@grandhorizonresorts.in',
+        division: 'water',
+        divisionLabel: 'Water',
+        subject: 'Bulk Supply Contract for 1L Natural Genesis Bottled Water',
+        message: 'Looking to partner for exclusive drinking water supply across 4 luxury resort properties in Eastern India. Estimated initial demand: 12,000 bottles/month. Requesting commercial rate card and distribution timeline.',
+        status: 'New'
+      },
+      {
+        id: 2,
+        date: '2026-10-10',
+        sender: 'Apex Grocers & Retail Network',
+        email: 'sourabh.m@apexgrocers.com',
+        division: 'bakery',
+        divisionLabel: 'Bakery',
+        subject: 'Daily Fresh Loaf Supply for 32 Retail Outlets',
+        message: 'We are expanding our premium morning bakery racks and are impressed by Natural Genesis artisan whole-wheat and white loaves. Requesting daily morning delivery schedule and wholesale margins.',
+        status: 'In Progress'
+      },
+      {
+        id: 3,
+        date: '2026-10-09',
+        sender: 'Al-Madina Agro Trading LLC (Dubai, UAE)',
+        email: 'tariq.rahman@almadinaagro.ae',
+        division: 'export',
+        divisionLabel: 'Export',
+        subject: 'Inquiry: 20ft Container Agricultural & Food Consignment',
+        message: 'Requesting CIF Jebel Ali quotation for packaged natural consumables. We require ISO/HACCP certifications and phytosanitary documentation for Middle East clearance.',
+        status: 'New'
+      },
+      {
+        id: 4,
+        date: '2026-10-08',
+        sender: 'Greenfield Dairy & Livestock Breeding',
+        email: 'contact@greenfieldfarms.org',
+        division: 'goat',
+        divisionLabel: 'Goatery',
+        subject: 'Procurement of High-Grade Sirohi & Boer Breeding Pairs',
+        message: 'Interested in procuring 25 certified healthy breeding pairs from your goatery facility. Please provide veterinary records and vaccination logs.',
+        status: 'Resolved'
+      },
+      {
+        id: 5,
+        date: '2026-10-06',
+        sender: 'Eastern Railway Catering Vendor Syndicate',
+        email: 'tenders@ercaterers.in',
+        division: 'water',
+        divisionLabel: 'Water',
+        subject: 'Tender Enquiry for 500ml Bottled Drinking Water',
+        message: 'Seeking bulk quotation for 50,000 units of sealed 500ml packaged drinking water for passenger kiosks with BIS compliance.',
+        status: 'In Progress'
+      },
+      {
+        id: 6,
+        date: '2026-10-03',
+        sender: 'Metro Gourmet Cafes',
+        email: 'chef.arjun@metrogourmet.co',
+        division: 'bakery',
+        divisionLabel: 'Bakery',
+        subject: 'Artisan Brioche Bun & Sourdough Custom Order',
+        message: 'Need 400 brioche burger buns daily for our burger bistro branches. Would like to arrange product sampling this week.',
+        status: 'Resolved'
+      }
+    ];
+
+    let inquiries = [...SAMPLE_INQUIRIES];
+    let currentFilter = 'all';
+    let searchQuery = '';
+    let selectedInquiry = null;
+
+    // Toast helper
+    function showToast(msg) {
+      const toast = document.getElementById('adminToast');
+      const toastMsg = document.getElementById('toastMessage');
+      if (!toast || !toastMsg) return;
+      toastMsg.textContent = msg;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    // Render Table
+    function renderTable() {
+      const tbody = document.getElementById('enquiriesTableBody');
+      if (!tbody) return;
+
+      const filtered = inquiries.filter(item => {
+        const matchesFilter = (currentFilter === 'all') || (item.division === currentFilter);
+        const matchesSearch = item.sender.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              item.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                              item.email.toLowerCase().includes(searchQuery.toLowerCase());
+        return matchesFilter && matchesSearch;
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="6" style="text-align:center; padding:32px; color:#607766;">No enquiries found matching your criteria.</td></tr>';
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(item => {
+        let tagClass = 'tag-water';
+        if (item.division === 'goat') tagClass = 'tag-goat';
+        if (item.division === 'bakery') tagClass = 'tag-bakery';
+        if (item.division === 'export') tagClass = 'tag-export';
+
+        let statusClass = 'status-new';
+        if (item.status === 'In Progress') statusClass = 'status-progress';
+        if (item.status === 'Resolved') statusClass = 'status-resolved';
+
+        return `
+          <tr>
+            <td style="white-space:nowrap; font-size:12px; color:#6c8273;">${item.date}</td>
+            <td>
+              <span class="sender-name">${item.sender}</span>
+              <span class="sender-meta">${item.email}</span>
+            </td>
+            <td><span class="division-tag ${tagClass}">${item.divisionLabel}</span></td>
+            <td>
+              <div style="font-weight:600; color:#183b2b; margin-bottom:2px;">${item.subject}</div>
+              <div style="font-size:11.5px; color:#5c7263; max-width:380px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${item.message}</div>
+            </td>
+            <td><span class="status-badge ${statusClass}">● ${item.status}</span></td>
+            <td>
+              <button type="button" class="table-action-btn" onclick="openInquiryModal(${item.id})">View Details</button>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    // Modal Details
+    window.openInquiryModal = function(id) {
+      selectedInquiry = inquiries.find(i => i.id === id);
+      if (!selectedInquiry) return;
+
+      const modal = document.getElementById('inquiryDetailModal');
+      document.getElementById('modalSender').textContent = selectedInquiry.sender;
+      document.getElementById('modalEmail').textContent = selectedInquiry.email;
+      document.getElementById('modalSubject').textContent = selectedInquiry.subject;
+      document.getElementById('modalMessage').textContent = selectedInquiry.message;
+      document.getElementById('modalDivTag').textContent = selectedInquiry.divisionLabel;
+      document.getElementById('modalStatusSelect').value = selectedInquiry.status;
+
+      let tagClass = 'tag-water';
+      if (selectedInquiry.division === 'goat') tagClass = 'tag-goat';
+      if (selectedInquiry.division === 'bakery') tagClass = 'tag-bakery';
+      if (selectedInquiry.division === 'export') tagClass = 'tag-export';
+      document.getElementById('modalDivTag').className = 'division-tag ' + tagClass;
+
+      modal.classList.add('open');
+    };
+
+    function closeInquiryModal() {
+      const modal = document.getElementById('inquiryDetailModal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    // Export CSV
+    function exportToCsv() {
+      const headers = ['ID,Date,Client,Email,Division,Subject,Status,Message'];
+      const rows = inquiries.map(i => {
+        const cleanMsg = `"${i.message.replace(/"/g, '""')}"`;
+        const cleanSub = `"${i.subject.replace(/"/g, '""')}"`;
+        return `${i.id},${i.date},"${i.sender}",${i.email},${i.divisionLabel},${cleanSub},${i.status},${cleanMsg}`;
+      });
+      const csvContent = 'data:text/csv;charset=utf-8,' + encodeURIComponent([headers, ...rows].join('\n'));
+      const link = document.createElement('a');
+      link.setAttribute('href', csvContent);
+      link.setAttribute('download', `Natural_Genesis_Enquiries_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      showToast('✓ Enquiries exported successfully as CSV.');
+    }
+
+    // Tab Switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const target = document.getElementById(btn.dataset.tab);
+        if (target) target.classList.add('active');
+      });
+    });
+
+    // Filter pills
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+        currentFilter = pill.dataset.filter;
+        renderTable();
+      });
+    });
+
+    // Search input
+    const searchInput = document.getElementById('tableSearchInput');
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value;
+        renderTable();
+      });
+    }
+
+    // Modal listeners
+    document.getElementById('closeDetailModalBtn')?.addEventListener('click', closeInquiryModal);
+    document.getElementById('inquiryDetailModal')?.addEventListener('click', (e) => {
+      if (e.target.id === 'inquiryDetailModal') closeInquiryModal();
+    });
+
+    document.getElementById('saveInquiryStatusBtn')?.addEventListener('click', () => {
+      if (!selectedInquiry) return;
+      const newStatus = document.getElementById('modalStatusSelect').value;
+      selectedInquiry.status = newStatus;
+      renderTable();
+      closeInquiryModal();
+      showToast(`Status updated to "${newStatus}"`);
+    });
+
+    // Export & Refresh buttons
+    document.getElementById('exportCsvBtn')?.addEventListener('click', exportToCsv);
+    document.getElementById('refreshDataBtn')?.addEventListener('click', () => {
+      renderTable();
+      showToast('Data refreshed successfully.');
+    });
+
+    // Logout
+    document.getElementById('logoutBtn')?.addEventListener('click', () => {
+      if (confirm('Are you sure you want to sign out of the Admin Portal?')) {
+        window.NGAuth.logout();
+      }
+    });
+
+    // Initial render
+    document.addEventListener('DOMContentLoaded', () => {
+      renderTable();
+      const currentUser = window.NGAuth?.getLoggedInUser() || 'subhadipsarkars@gmail.com';
+      document.getElementById('displayAdminEmail').textContent = currentUser;
+      document.getElementById('lastLoginTime').textContent = new Date().toLocaleString();
+    });
+  </script>
+</body>
+</html>

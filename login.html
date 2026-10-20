@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Natural Genesis Private Limited — Admin Portal Sign In">
+  <title>Admin Portal Sign In | Natural Genesis</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body.login-page-body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      background: radial-gradient(circle at 15% 20%, #e8f5e9 0%, #f4f8f4 60%, #e6efe8 100%);
+      font-family: 'DM Sans', sans-serif;
+      margin: 0;
+      position: relative;
+    }
+    .login-nav-top {
+      padding: 24px 6.1%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .login-container {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 30px 20px 60px;
+    }
+    .login-card {
+      background: #ffffff;
+      border-radius: 24px;
+      max-width: 450px;
+      width: 100%;
+      padding: 42px 38px 36px;
+      box-shadow: 0 30px 70px -15px rgba(22, 54, 34, 0.16), 0 0 0 1px rgba(33, 128, 68, 0.12);
+      box-sizing: border-box;
+      position: relative;
+    }
+    .back-home-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font: 600 12.5px 'Manrope', sans-serif;
+      color: #3b5c46;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .back-home-link:hover {
+      color: #1a743a;
+    }
+    .login-footer-text {
+      text-align: center;
+      padding: 20px;
+      font-size: 11px;
+      color: #6d8574;
+    }
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 32px 24px 28px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body class="login-page-body">
+
+  <nav class="login-nav-top">
+    <a class="brand" href="index.html" aria-label="Natural Genesis home">
+      <img class="brand-logo" src="natural-genesis-logo.jpeg" alt="Natural Genesis logo">
+      <span class="brand-name">NATURAL GENESIS<small>PRIVATE LIMITED</small></span>
+    </a>
+    <a href="index.html" class="back-home-link">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"></polyline></svg>
+      Back to Website
+    </a>
+  </nav>
+
+  <main class="login-container">
+    <div class="login-card">
+      <div class="auth-modal-header">
+        <div class="auth-brand-badge">
+          <img src="natural-genesis-logo.jpeg" alt="Natural Genesis Logo" class="auth-logo-img">
+        </div>
+        <h2>Admin Portal</h2>
+        <p>Natural Genesis Operations &amp; Enquiries Management</p>
+      </div>
+
+      <div id="authAlert" class="auth-alert" style="display:none;" role="alert"></div>
+
+      <form id="adminLoginForm" class="auth-form" novalidate>
+        <div class="form-group">
+          <label for="adminEmail">Username / Email</label>
+          <div class="input-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+            <input type="email" id="adminEmail" name="email" value="subhadipsarkars@gmail.com" required autocomplete="username">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="adminPassword">Security Password</label>
+          <div class="input-wrap">
+            <svg class="input-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+            <input type="password" id="adminPassword" name="password" placeholder="Enter password" required autocomplete="current-password">
+            <button type="button" class="pwd-toggle-btn" id="togglePwdBtn" aria-label="Show password">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-aux">
+          <label class="remember-label">
+            <input type="checkbox" id="rememberAdmin" checked>
+            <span>Remember this device</span>
+          </label>
+          <span class="auth-hint">Secure SSL 256-bit</span>
+        </div>
+
+        <button type="submit" class="auth-submit-btn" id="adminSubmitBtn">
+          <span>Sign In to Admin Portal</span>
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        </button>
+
+        <div class="auth-cred-tip">
+          <span>🔒</span>
+          <span>Configured Admin: <strong>subhadipsarkars@gmail.com</strong> / <strong>Aviraj2023@</strong></span>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer class="login-footer-text">
+    © 2026 Natural Genesis Private Limited. All rights reserved.
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    // If already logged in, redirect straight to admin dashboard
+    if (window.NGAuth && window.NGAuth.getLoggedInUser()) {
+      window.location.href = 'admin.html';
+    }
+  </script>
+</body>
+</html>
